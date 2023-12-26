@@ -2,25 +2,35 @@ package main
 
 import "fmt"
 
-func main() {
-	//Decalaraciones
-	helloMessage := "Hello"
-	worldMessage := "World"
-
-	//Println //Imprime y agrega un enter o salto de linea
-	fmt.Println(helloMessage, worldMessage)
-
-	//Printf
-	nombre := "Platzi"
-	cursos := 500
-	fmt.Printf("%s tiene mas de %d cursos\n", nombre, cursos) //Esepicida el tipo de dato
-	fmt.Printf("%v tiene mas de %v cursos\n", nombre, cursos) //con v puede ser cualquiera
-
-	//Sprintf
-	message := fmt.Sprintf("%s tiene mas de %d cursos", nombre, cursos)
+func normalFuntion(message string) {
 	fmt.Println(message)
+}
 
-	//Tipo de datos //para saber el tipo de dato
-	fmt.Printf("helloMessage: %T\n", helloMessage)
-	fmt.Printf("cursos: %T\n", cursos)
+func tripeArgument(a int, b int, c string) {
+	fmt.Println(a, b, c)
+}
+
+// Recibe un INT y devuelve un INT
+func returnValue(a int) int {
+	return a * 2
+}
+
+// Recibe 1 valor A, pero retorna dos valores c y d
+func doubleReturn(a int) (c, d int) {
+	return a, a * 2
+}
+
+func main() {
+	normalFuntion("Hola Mundo")
+	tripeArgument(1, 2, "Hola Go")
+
+	value := returnValue(2)
+	fmt.Println(value)
+
+	value1, value2 := doubleReturn(2)
+	fmt.Println("Value1 y Value2:", value1, value2)
+
+	// SI necesito un solo valor, entonces...
+	value1Only, _ := doubleReturn(4)
+	fmt.Println("value1Only:", value1Only)
 }
