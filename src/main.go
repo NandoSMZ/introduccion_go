@@ -33,5 +33,4 @@ func main() {
 	// SI necesito un solo valor, entonces...
 	value1Only, _ := doubleReturn(4)
 	fmt.Println("value1Only:", value1Only)
-
 }
