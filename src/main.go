@@ -1,39 +1,46 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"strings"
+)
+
+func isPalindromo(text string) {
+	var textReverse string
+
+	for i := len(text) - 1; i >= 0; i-- {
+		textReverse += string(text[i])
+	}
+
+	if text == textReverse {
+		fmt.Println("Es Palindomo")
+	} else {
+		fmt.Println("No es Palindromo por que la palabra es:", textReverse)
+	}
+}
 
 func main() {
-	//Array
-	var array [4]int
-	array[0] = 1
-	array[1] = 2
-	array[2] = 3
-	array[3] = 4
-	// len Indica cuantos elementos hay en el array
-	// cap Indica cuanta capacidad tiene el array
-	fmt.Println(array, len(array), cap(array))
+	slice := []string{"Hola", "Mundo", "Que Hace"}
 
-	//slice
-	//Aqui no se indica la cantidad que va tener si no que se ingresa de una vez lo que tiene o debe tener
-	slice := []int{0, 1, 2, 3, 4, 5, 6}
-	fmt.Println(slice, len(slice), cap(slice))
+	//Para traer indice y valor
+	for i, valor := range slice {
+		fmt.Println(i, valor)
+	}
 
-	// Metodos en el Slice
-	// El primer elemento es inclusivo y el segundo no es inclusivo
-	fmt.Println(slice[0])
-	fmt.Println(slice[:3])  // Imprime hasta el indice 3
-	fmt.Println(slice[2:4]) // Imprime del indice 2 a 4
-	fmt.Println(slice[4:])  // que imprima desde el indice 4
+	// Solo necesito el valor
+	for _, valor := range slice {
+		fmt.Println(valor)
+	}
 
-	//Append
-	slice = append(slice, 8) //Agrega el 8 en el slice al final
-	fmt.Println(slice)
+	// Solo indice
+	for i := range slice {
+		fmt.Println(i)
+	}
 
-	//Append nueva list (Agregar nueva lista)
-	newSlice := []int{8, 9, 10}
-	slice = append(slice, newSlice...)
-	fmt.Println(slice)
-
-	// En arrays no se pueden agragar elementos
-	// En slice si se puede agregar elementos
+	var palabra string
+	fmt.Println("Ingrese la palabra")
+	fmt.Scan(&palabra)
+	palabraToMinus := strings.ToLower(palabra)
+	fmt.Println("Llamando la funcion para la palabra:", palabra)
+	isPalindromo(palabraToMinus)
 }
