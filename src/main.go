@@ -2,18 +2,39 @@ package main
 
 import "fmt"
 
-type car struct {
+type pc struct {
+	ram   int
+	disk  int
 	brand string
-	year  int
+}
+
+func (myPC pc) ping() {
+	fmt.Println(myPC.brand, "Pong")
+}
+
+// COn el puntero ingreo directamente al valor en memoria
+func (myPC *pc) duplicateRam() {
+	myPC.ram = myPC.ram * 2
 }
 
 func main() {
-	myCar := car{brand: "For", year: 2020}
-	fmt.Println(myCar)
+	a := 50
+	b := &a //obtiene direccion en memoria
 
-	//Otra manera de instanciar
-	var otherCar car
-	otherCar.brand = "Ferrari"
-	otherCar.year = 2022
-	fmt.Println(otherCar)
+	fmt.Println(a)
+	fmt.Println(b)
+	fmt.Println(*b) // Obtiene el valor que apunta esa dir de memoria
+
+	myPC := pc{ram: 16, disk: 200, brand: "MSI"}
+	fmt.Println(myPC)
+
+	myPC.ping()
+
+	fmt.Println(myPC)
+	myPC.duplicateRam()
+
+	fmt.Println(myPC)
+	myPC.duplicateRam()
+
+	fmt.Println(myPC)
 }
