@@ -1,25 +1,19 @@
 package main
 
-import (
-	"fmt"
-)
+import "fmt"
+
+type car struct {
+	brand string
+	year  int
+}
 
 func main() {
-	m := make(map[string]int)
+	myCar := car{brand: "For", year: 2020}
+	fmt.Println(myCar)
 
-	m["Jose"] = 14
-	m["Pepito"] = 20
-
-	fmt.Println(m)
-
-	//Recorrer map
-
-	for i, v := range m {
-		fmt.Println(i, v)
-	}
-
-	// Encontrar Valor
-	// con el ok, vamos a saber si la variable existe y sera booleano
-	value, ok := m["Jose"]
-	fmt.Println(value, ok)
+	//Otra manera de instanciar
+	var otherCar car
+	otherCar.brand = "Ferrari"
+	otherCar.year = 2022
+	fmt.Println(otherCar)
 }
