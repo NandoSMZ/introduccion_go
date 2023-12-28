@@ -2,18 +2,39 @@ package main
 
 import "fmt"
 
-type pc struct {
-	ram   int
-	disk  int
-	brand string
+type figuras2D interface {
+	area() float64
 }
 
-// Personalizar el output de STRUCT personalizado
-func (myPC pc) String() string {
-	return fmt.Sprintf("Tengo %d GB RAM, %d GB Disco y es una %s", myPC.ram, myPC.disk, myPC.brand)
+type cuadrado struct {
+	base float64
+}
+
+type rectangulo struct {
+	base   float64
+	altura float64
+}
+
+func (c cuadrado) area() float64 {
+	return c.base * c.base
+}
+
+func (r rectangulo) area() float64 {
+	return r.base * r.altura
+}
+
+func calcular(f figuras2D) {
+	fmt.Println("Area:", f.area())
 }
 
 func main() {
-	myPC := pc{ram: 16, brand: "MSI", disk: 200}
-	fmt.Println(myPC)
+	myCuadrado := cuadrado{base: 2}
+	myRectangulo := rectangulo{base: 2, altura: 4}
+
+	calcular(myCuadrado)
+	calcular(myRectangulo)
+
+	//Lista Interfaces
+	myInterface := []interface{}{"hola", 12, 4.90}
+	fmt.Println(myInterface...)
 }
