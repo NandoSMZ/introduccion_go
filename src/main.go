@@ -8,33 +8,12 @@ type pc struct {
 	brand string
 }
 
-func (myPC pc) ping() {
-	fmt.Println(myPC.brand, "Pong")
-}
-
-// COn el puntero ingreo directamente al valor en memoria
-func (myPC *pc) duplicateRam() {
-	myPC.ram = myPC.ram * 2
+// Personalizar el output de STRUCT personalizado
+func (myPC pc) String() string {
+	return fmt.Sprintf("Tengo %d GB RAM, %d GB Disco y es una %s", myPC.ram, myPC.disk, myPC.brand)
 }
 
 func main() {
-	a := 50
-	b := &a //obtiene direccion en memoria
-
-	fmt.Println(a)
-	fmt.Println(b)
-	fmt.Println(*b) // Obtiene el valor que apunta esa dir de memoria
-
-	myPC := pc{ram: 16, disk: 200, brand: "MSI"}
-	fmt.Println(myPC)
-
-	myPC.ping()
-
-	fmt.Println(myPC)
-	myPC.duplicateRam()
-
-	fmt.Println(myPC)
-	myPC.duplicateRam()
-
+	myPC := pc{ram: 16, brand: "MSI", disk: 200}
 	fmt.Println(myPC)
 }
