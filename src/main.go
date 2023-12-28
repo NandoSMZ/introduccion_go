@@ -15,14 +15,17 @@ type rectangulo struct {
 	altura float64
 }
 
+// Metodo Cuadrado
 func (c cuadrado) area() float64 {
 	return c.base * c.base
 }
 
+// Metodo Rectangulo
 func (r rectangulo) area() float64 {
 	return r.base * r.altura
 }
 
+// Funcion calculadora
 func calcular(f figuras2D) {
 	fmt.Println("Area:", f.area())
 }
