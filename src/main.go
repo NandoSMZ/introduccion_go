@@ -1,34 +1,18 @@
 package main
 
-import (
-	"fmt"
-	"sync"
-	"time"
-)
+import "fmt"
 
-func say(text string, wg *sync.WaitGroup) {
-
-	defer wg.Done() // Libera la goroutine de la funcion
-
-	fmt.Println(text)
+func say(text string, c chan string) {
+	c <- text //Vamos a ingresar el text al chanel
 }
 
 func main() {
-	var wg sync.WaitGroup // Acomula GO routins y las libera poco a poco
+	//creacion de chanel especificando cuantas goroutines van a pasar en esste caso "1" si se deja basio sera default o dinamico
+	c := make(chan string, 1)
 
-	fmt.Println("Hello") // Imprime primero
-	wg.Add(1)            // Se agrega la go rotin al waitgroup
+	fmt.Println("Hello")
 
-	go say("World", &wg) // Se ejecuta de forma concurrente
+	go say("Bye", c) //ejecutamos la funcion indicando el chanel c
 
-	wg.Wait() // Espere hasta que todas las GO Rountins se finalicen
-
-	go func(text string) { //Funcion Anonima
-		fmt.Println(text)
-	}("Adios")
-
-	// Se agrega el contador par que el WORLD alcance a salir
-
-	time.Sleep(time.Second * 1)
-
+	fmt.Println(<-c) // Sacamos el dato que esta en el channel
 }
