@@ -8,7 +8,7 @@ import (
 
 func say(text string, wg *sync.WaitGroup) {
 
-	defer wg.Done()
+	defer wg.Done() // Libera la goroutine de la funcion
 
 	fmt.Println(text)
 }
@@ -23,7 +23,7 @@ func main() {
 
 	wg.Wait() // Espere hasta que todas las GO Rountins se finalicen
 
-	go func(text string) {
+	go func(text string) { //Funcion Anonima
 		fmt.Println(text)
 	}("Adios")
 
