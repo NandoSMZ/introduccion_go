@@ -1,43 +1,34 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"sync"
+	"time"
+)
 
-type figuras2D interface {
-	area() float64
-}
+func say(text string, wg *sync.WaitGroup) {
 
-type cuadrado struct {
-	base float64
-}
+	defer wg.Done()
 
-type rectangulo struct {
-	base   float64
-	altura float64
-}
-
-// Metodo Cuadrado
-func (c cuadrado) area() float64 {
-	return c.base * c.base
-}
-
-// Metodo Rectangulo
-func (r rectangulo) area() float64 {
-	return r.base * r.altura
-}
-
-// Funcion calculadora
-func calcular(f figuras2D) {
-	fmt.Println("Area:", f.area())
+	fmt.Println(text)
 }
 
 func main() {
-	myCuadrado := cuadrado{base: 2}
-	myRectangulo := rectangulo{base: 2, altura: 4}
+	var wg sync.WaitGroup // Acomula GO routins y las libera poco a poco
 
-	calcular(myCuadrado)
-	calcular(myRectangulo)
+	fmt.Println("Hello") // Imprime primero
+	wg.Add(1)            // Se agrega la go rotin al waitgroup
 
-	//Lista Interfaces
-	myInterface := []interface{}{"hola", 12, 4.90}
-	fmt.Println(myInterface...)
+	go say("World", &wg) // Se ejecuta de forma concurrente
+
+	wg.Wait() // Espere hasta que todas las GO Rountins se finalicen
+
+	go func(text string) {
+		fmt.Println(text)
+	}("Adios")
+
+	// Se agrega el contador par que el WORLD alcance a salir
+
+	time.Sleep(time.Second * 1)
+
 }
